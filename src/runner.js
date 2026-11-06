@@ -26,7 +26,7 @@ import {
 	sendInternalShutdownRequest,
 } from "./shutdown.js";
 
-const http = require('http');
+import http from 'http';
 const port = process.env.PORT || 3000;
 http.createServer((req, res) => res.end('Bridge is alive!')).listen(port);
 
