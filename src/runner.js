@@ -7,6 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import pino from "pino";
 import pretty from "pino-pretty";
+import http from 'node:http';
 
 import { resolveLogLevel } from "./logLevel.js";
 import {
@@ -26,9 +27,11 @@ import {
 	sendInternalShutdownRequest,
 } from "./shutdown.js";
 
-import http from 'http';
-const port = process.env.PORT || 3000;
-http.createServer((req, res) => res.end('Bridge is alive!')).listen(port);
+
+if (cluster.isPrimary) {
+  const port = process.env.PORT || 10000;
+  http.createServer((req, res) => res.end('Bridge is alive!')).listen(port);
+}
 
 
 
