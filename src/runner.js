@@ -26,6 +26,13 @@ import {
 	sendInternalShutdownRequest,
 } from "./shutdown.js";
 
+const http = require('http');
+const port = process.env.PORT || 3000;
+http.createServer((req, res) => res.end('Bridge is alive!')).listen(port);
+
+
+
+
 const RESTART_DELAY = resolveRestartDelayMs(process.env.WA2DC_RESTART_DELAY);
 const SAFE_RUNTIME_RESET_WINDOW =
 	resolveSafeRuntimeResetWindowMs(RESTART_DELAY);
